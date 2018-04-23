@@ -16,6 +16,8 @@
 	<body>
 		<%@ include file="header.jsp" %>
 		<%@ include file="products.jsp" %>   
+		 	<a href="<c:url value="/cart" />" ><button>Go to Cart</button></a>
+		
 	</body>
 	
 </html>

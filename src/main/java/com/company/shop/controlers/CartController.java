@@ -25,33 +25,32 @@ public class CartController extends HttpServlet {
 	private static final String CART_VIEW = "cart.jsp";
 	
 	static List<ProductDto> cartProducts;
-	
-//	List<ProductDto> getInstance() {
-//		if(cartProducts==null) {
-//			return new ArrayList<ProductDto>();		
-//		}
-//	return cartProducts;
-//	
-//	}
+	public boolean check ;
+
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
 		cartProducts = (List<ProductDto>) session.getAttribute("cartProducts");
 		if(cartProducts.size() == 0) {
-			System.out.println("No item in cart!");
+			System.out.println("No items in cart!");
+			request.setAttribute("cartProducts", cartProducts);
+			 check = false;
 		} else {
 			
 			for(int i = 0; i < cartProducts.size(); i ++) {
 				  System.out.println("cart init:" + cartProducts.get(i));
 			  }
 			  
-		request.setAttribute("cartProducts", cartProducts);
+			request.setAttribute("cartProducts", cartProducts);
+		check = true;
+		}
 		
-		// Forward to cart page
+		// Forward to cart page			
+		request.setAttribute("check", check);
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(CART_VIEW);
 		dispatcher.forward(request, response);
-		}
 
 	}
 
@@ -74,8 +73,8 @@ public class CartController extends HttpServlet {
 		} else {
 			System.out.println("error trying to delete product");
 		}
-		
-		  response.sendRedirect("cart");
+		this.doGet(request,response);
+//		  response.sendRedirect("cart");
 
 			
 	}

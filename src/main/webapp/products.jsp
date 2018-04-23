@@ -8,7 +8,6 @@
 	<c:set var="product" scope="page" value="${products.get(i)}"/>  
 	  
    	<p>
-   	   		<b>${product.id}</b>
    		<b>${product.label}</b>
    		<input type = "checkbox" name= "selections" value="${products.get(i).getId()}" />
    		<br/>
@@ -19,6 +18,5 @@
 
  <input type="submit" value="Submit"/> 
  
- 	<a href="<c:url value="/cart" />" >Go to Cart</a>
 </form>
 
